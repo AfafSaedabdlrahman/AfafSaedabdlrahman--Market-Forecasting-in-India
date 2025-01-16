@@ -98,6 +98,35 @@ The model had to predict feature_11 and feature_12 without knowing their values 
 
 This required careful feature engineering and leveraging temporal dependencies.
 
+🧪 Tries and Improvements
+TRY1: Without Spatial Information
+Observations:
+
+feature_11_int: The higher MSE (0.0013) and RMSE (0.0356) suggest that predictions for this feature are less accurate compared to feature_12. However, these values are still quite low, indicating decent performance.
+
+feature_12: The near-zero MSE (0.0000) and RMSE (0.0006) indicate extremely high accuracy for this feature.
+
+Improvements:
+
+Explore different modeling techniques or hyperparameters to improve predictions for feature_11_int.
+
+Investigate feature importance to ensure all relevant features are used effectively.
+
+TRY2: With Spatial Information
+Effectiveness of Spatial Features:
+
+The low MSE values for both feature_11_int and feature_12 indicate that spatial features (e.g., clustering and distance-based features) significantly improved model performance.
+
+Spatial clustering (e.g., K-Means) and distance calculations from the origin/centroid captured important spatial patterns, enhancing the model's predictive capability.
+
+Model Accuracy:
+
+The high accuracy for feature_12 and relatively good accuracy for feature_11_int demonstrate the effectiveness of integrating spatial information.
+
+Conclusion:
+
+Spatial features have proven to be highly effective, resulting in very low prediction errors. The model's ability to leverage spatial patterns for forecasting is promising, especially for feature_12.
+
 📈 Results
 The predictive model successfully forecasts feature_11 and feature_12 with high accuracy, enabling network operators to:
 
@@ -106,3 +135,4 @@ Proactively optimize network performance.
 Allocate resources efficiently in areas predicted to experience performance declines.
 
 Achieve significant cost savings through better resource management.
+
