@@ -1,0 +1,5 @@
+pip install llama-index-llms-ollama
+pydantic
+llama_index.llms.groq 
+pip install xgboost
+pip install BayesianOptimization
