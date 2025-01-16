@@ -40,7 +40,7 @@ In this project, we tackle the challenge of predicting cellular network performa
 - The spatial features (`cell_x`, `cell_y`, `cell_z`) show a wide range of values, indicating a diverse geographical distribution of cells.
 - Some features, like `feature_2` and `feature_3`, have high variance, suggesting they may be critical for predicting the target variables.
 
-![EDA Diagram](path/to/eda_diagram.png)
+
 
 ### Feature Engineering
 - Spatial clustering and distance-based metrics were used to encode geographical positions.
@@ -51,7 +51,6 @@ In this project, we tackle the challenge of predicting cellular network performa
 - Feature interactions were explored to capture relationships between spatial and performance metrics.
 - Temporal features (e.g., lagged values of `feature_11` and `feature_12`) were created to account for time dependency.
 
-![Feature Engineering Diagram](path/to/feature_engineering_diagram.png)
 
 ### Modeling
 - XGBoost was chosen for its ability to handle multi-output regression tasks.
@@ -62,7 +61,7 @@ In this project, we tackle the challenge of predicting cellular network performa
 - Feature importance analysis revealed that spatial features (`cell_x`, `cell_y`, `cell_z`) and temporal lags were among the most influential predictors.
 - Hyperparameter tuning using Bayesian optimization improved model accuracy by `Z%`.
 
-![Modeling Pipeline](path/to/modeling_pipeline_diagram.png)
+
 
 ---
 
@@ -122,4 +121,4 @@ The predictive model successfully forecasts `feature_11` and `feature_12` with h
 - Allocate resources efficiently in areas predicted to experience performance declines.
 - Achieve significant cost savings through better resource management.
 
-![Results Diagram](path/to/results_diagram.png)
+
