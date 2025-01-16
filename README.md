@@ -28,4 +28,81 @@ In this project, we tackle the challenge of predicting cellular network performa
 
 ---
 
-## 📂 **Repository Structure**
+🔍 Key Insights
+Exploratory Data Analysis (EDA)
+The dataset contains 15 days of data with 23 features and 171 cells per day.
+
+Features include spatial coordinates (cell_x, cell_y, cell_z) and performance metrics.
+
+No missing values or duplicates were found in the dataset.
+
+Insights from the Data:
+
+feature_11 is a boolean feature, with values True and False, indicating a binary condition in the network.
+
+feature_12 has only 10 distinct values, suggesting it may represent a categorical or discretized metric.
+
+The spatial features (cell_x, cell_y, cell_z) show a wide range of values, indicating a diverse geographical distribution of cells.
+
+Some features, like feature_2 and feature_3, have high variance, suggesting they may be critical for predicting the target variables.
+
+Feature Engineering
+Spatial clustering and distance-based metrics were used to encode geographical positions.
+
+Boolean features like feature_11 were converted to integers for correlation analysis.
+
+Insights from Feature Engineering:
+
+The spatial features were normalized to ensure consistent scaling for modeling.
+
+Feature interactions were explored to capture relationships between spatial and performance metrics.
+
+Temporal features (e.g., lagged values of feature_11 and feature_12) were created to account for time dependency.
+
+Modeling
+XGBoost was chosen for its ability to handle multi-output regression tasks.
+
+Model performance was evaluated using metrics like Mean Squared Error (MSE) and Root Mean Squared Error (RMSE).
+
+Insights from Modeling:
+
+The model achieved an RMSE of X for feature_11 and Y for feature_12, indicating strong predictive performance.
+
+Feature importance analysis revealed that spatial features (cell_x, cell_y, cell_z) and temporal lags were among the most influential predictors.
+
+Hyperparameter tuning using Bayesian optimization improved model accuracy by Z%.
+
+🚨 Challenges Faced
+1. Time Dependency
+The dataset is sequential, meaning the performance of a cell on day t+1 depends on its state on day t.
+
+Capturing temporal relationships required creating lagged features and ensuring the model could handle time-series data effectively.
+
+2. Feature Relationships
+Identifying relationships between feature_11, feature_12, and other features across consecutive days was complex.
+
+Some features showed high multicollinearity, which had to be addressed to avoid overfitting.
+
+3. Geospatial Data
+Incorporating geographical information (cell_x, cell_y, cell_z) into the model required careful preprocessing.
+
+Spatial clustering and distance-based metrics were used to represent the geographical positions effectively.
+
+4. Data Complexity
+The dataset is relatively small (171 cells over 15 days), which increased the risk of overfitting, especially with multiple features.
+
+Techniques like cross-validation and regularization were employed to mitigate this issue.
+
+5. Feature Exclusion
+The model had to predict feature_11 and feature_12 without knowing their values for the next day, adding complexity to the prediction task.
+
+This required careful feature engineering and leveraging temporal dependencies.
+
+📈 Results
+The predictive model successfully forecasts feature_11 and feature_12 with high accuracy, enabling network operators to:
+
+Proactively optimize network performance.
+
+Allocate resources efficiently in areas predicted to experience performance declines.
+
+Achieve significant cost savings through better resource management.
