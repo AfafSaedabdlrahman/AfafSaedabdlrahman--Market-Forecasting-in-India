@@ -1,4 +1,3 @@
-
 # Cellular Network Performance Prediction
 
 Welcome to the **Cellular Network Performance Prediction** project! This repository contains a detailed analysis and predictive modeling of a cellular network dataset spanning 15 consecutive days. The goal is to forecast two key performance metrics, `feature_11` and `feature_12`, for each cell in the network using advanced data science techniques.
@@ -28,111 +27,99 @@ In this project, we tackle the challenge of predicting cellular network performa
 
 ---
 
-🔍 Key Insights
-Exploratory Data Analysis (EDA)
-The dataset contains 15 days of data with 23 features and 171 cells per day.
+## 🔍 **Key Insights**
 
-Features include spatial coordinates (cell_x, cell_y, cell_z) and performance metrics.
+### Exploratory Data Analysis (EDA)
+- The dataset contains 15 days of data with 23 features and 171 cells per day.
+- Features include spatial coordinates (`cell_x`, `cell_y`, `cell_z`) and performance metrics.
+- No missing values or duplicates were found in the dataset.
 
-No missing values or duplicates were found in the dataset.
+**Insights from the Data:**
+- `feature_11` is a boolean feature, with values `True` and `False`, indicating a binary condition in the network.
+- `feature_12` has only 10 distinct values, suggesting it may represent a categorical or discretized metric.
+- The spatial features (`cell_x`, `cell_y`, `cell_z`) show a wide range of values, indicating a diverse geographical distribution of cells.
+- Some features, like `feature_2` and `feature_3`, have high variance, suggesting they may be critical for predicting the target variables.
 
-Insights from the Data:
+![EDA Diagram](path/to/eda_diagram.png)
 
-feature_11 is a boolean feature, with values True and False, indicating a binary condition in the network.
+### Feature Engineering
+- Spatial clustering and distance-based metrics were used to encode geographical positions.
+- Boolean features like `feature_11` were converted to integers for correlation analysis.
 
-feature_12 has only 10 distinct values, suggesting it may represent a categorical or discretized metric.
+**Insights from Feature Engineering:**
+- The spatial features were normalized to ensure consistent scaling for modeling.
+- Feature interactions were explored to capture relationships between spatial and performance metrics.
+- Temporal features (e.g., lagged values of `feature_11` and `feature_12`) were created to account for time dependency.
 
-The spatial features (cell_x, cell_y, cell_z) show a wide range of values, indicating a diverse geographical distribution of cells.
+![Feature Engineering Diagram](path/to/feature_engineering_diagram.png)
 
-Some features, like feature_2 and feature_3, have high variance, suggesting they may be critical for predicting the target variables.
+### Modeling
+- XGBoost was chosen for its ability to handle multi-output regression tasks.
+- Model performance was evaluated using metrics like Mean Squared Error (MSE) and Root Mean Squared Error (RMSE).
 
-Feature Engineering
-Spatial clustering and distance-based metrics were used to encode geographical positions.
+**Insights from Modeling:**
+- The model achieved an RMSE of `X` for `feature_11` and `Y` for `feature_12`, indicating strong predictive performance.
+- Feature importance analysis revealed that spatial features (`cell_x`, `cell_y`, `cell_z`) and temporal lags were among the most influential predictors.
+- Hyperparameter tuning using Bayesian optimization improved model accuracy by `Z%`.
 
-Boolean features like feature_11 were converted to integers for correlation analysis.
+![Modeling Pipeline](path/to/modeling_pipeline_diagram.png)
 
-Insights from Feature Engineering:
+---
 
-The spatial features were normalized to ensure consistent scaling for modeling.
+## 🚨 **Challenges Faced**
 
-Feature interactions were explored to capture relationships between spatial and performance metrics.
+### 1. Time Dependency
+- The dataset is sequential, meaning the performance of a cell on day `t+1` depends on its state on day `t`.
+- Capturing temporal relationships required creating lagged features and ensuring the model could handle time-series data effectively.
 
-Temporal features (e.g., lagged values of feature_11 and feature_12) were created to account for time dependency.
+### 2. Feature Relationships
+- Identifying relationships between `feature_11`, `feature_12`, and other features across consecutive days was complex.
+- Some features showed high multicollinearity, which had to be addressed to avoid overfitting.
 
-Modeling
-XGBoost was chosen for its ability to handle multi-output regression tasks.
+### 3. Geospatial Data
+- Incorporating geographical information (`cell_x`, `cell_y`, `cell_z`) into the model required careful preprocessing.
+- Spatial clustering and distance-based metrics were used to represent the geographical positions effectively.
 
-Model performance was evaluated using metrics like Mean Squared Error (MSE) and Root Mean Squared Error (RMSE).
+### 4. Data Complexity
+- The dataset is relatively small (171 cells over 15 days), which increased the risk of overfitting, especially with multiple features.
+- Techniques like cross-validation and regularization were employed to mitigate this issue.
 
-Insights from Modeling:
+### 5. Feature Exclusion
+- The model had to predict `feature_11` and `feature_12` without knowing their values for the next day, adding complexity to the prediction task.
+- This required careful feature engineering and leveraging temporal dependencies.
 
-The model achieved an RMSE of X for feature_11 and Y for feature_12, indicating strong predictive performance.
+---
 
-Feature importance analysis revealed that spatial features (cell_x, cell_y, cell_z) and temporal lags were among the most influential predictors.
+## 🪓 **Tries and Improvements**
 
-Hyperparameter tuning using Bayesian optimization improved model accuracy by Z%.
+### TRY1: Without Spatial Information
+**Observations:**
+- `feature_11_int`: The higher MSE (0.0013) and RMSE (0.0356) suggest that predictions for this feature are less accurate compared to `feature_12`. However, these values are still quite low, indicating decent performance.
+- `feature_12`: The near-zero MSE (0.0000) and RMSE (0.0006) indicate extremely high accuracy for this feature.
 
-🚨 Challenges Faced
-1. Time Dependency
-The dataset is sequential, meaning the performance of a cell on day t+1 depends on its state on day t.
+**Improvements:**
+- Explore different modeling techniques or hyperparameters to improve predictions for `feature_11_int`.
+- Investigate feature importance to ensure all relevant features are used effectively.
 
-Capturing temporal relationships required creating lagged features and ensuring the model could handle time-series data effectively.
+### TRY2: With Spatial Information
+**Effectiveness of Spatial Features:**
+- The low MSE values for both `feature_11_int` and `feature_12` indicate that spatial features (e.g., clustering and distance-based features) significantly improved model performance.
+- Spatial clustering (e.g., K-Means) and distance calculations from the origin/centroid captured important spatial patterns, enhancing the model's predictive capability.
 
-2. Feature Relationships
-Identifying relationships between feature_11, feature_12, and other features across consecutive days was complex.
+**Model Accuracy:**
+- The high accuracy for `feature_12` and relatively good accuracy for `feature_11_int` demonstrate the effectiveness of integrating spatial information.
 
-Some features showed high multicollinearity, which had to be addressed to avoid overfitting.
+**Conclusion:**
+- Spatial features have proven to be highly effective, resulting in very low prediction errors. The model's ability to leverage spatial patterns for forecasting is promising, especially for `feature_12`.
 
-3. Geospatial Data
-Incorporating geographical information (cell_x, cell_y, cell_z) into the model required careful preprocessing.
+---
 
-Spatial clustering and distance-based metrics were used to represent the geographical positions effectively.
+## 📈 **Results**
 
-4. Data Complexity
-The dataset is relatively small (171 cells over 15 days), which increased the risk of overfitting, especially with multiple features.
+The predictive model successfully forecasts `feature_11` and `feature_12` with high accuracy, enabling network operators to:
 
-Techniques like cross-validation and regularization were employed to mitigate this issue.
+- Proactively optimize network performance.
+- Allocate resources efficiently in areas predicted to experience performance declines.
+- Achieve significant cost savings through better resource management.
 
-5. Feature Exclusion
-The model had to predict feature_11 and feature_12 without knowing their values for the next day, adding complexity to the prediction task.
-
-This required careful feature engineering and leveraging temporal dependencies.
-
-🧪 Tries and Improvements
-TRY1: Without Spatial Information
-Observations:
-
-feature_11_int: The higher MSE (0.0013) and RMSE (0.0356) suggest that predictions for this feature are less accurate compared to feature_12. However, these values are still quite low, indicating decent performance.
-
-feature_12: The near-zero MSE (0.0000) and RMSE (0.0006) indicate extremely high accuracy for this feature.
-
-Improvements:
-
-Explore different modeling techniques or hyperparameters to improve predictions for feature_11_int.
-
-Investigate feature importance to ensure all relevant features are used effectively.
-
-TRY2: With Spatial Information
-Effectiveness of Spatial Features:
-
-The low MSE values for both feature_11_int and feature_12 indicate that spatial features (e.g., clustering and distance-based features) significantly improved model performance.
-
-Spatial clustering (e.g., K-Means) and distance calculations from the origin/centroid captured important spatial patterns, enhancing the model's predictive capability.
-
-Model Accuracy:
-
-The high accuracy for feature_12 and relatively good accuracy for feature_11_int demonstrate the effectiveness of integrating spatial information.
-
-Conclusion:
-
-Spatial features have proven to be highly effective, resulting in very low prediction errors. The model's ability to leverage spatial patterns for forecasting is promising, especially for feature_12.
-
-📈 Results
-The predictive model successfully forecasts feature_11 and feature_12 with high accuracy, enabling network operators to:
-
-Proactively optimize network performance.
-
-Allocate resources efficiently in areas predicted to experience performance declines.
-
-Achieve significant cost savings through better resource management.
-
+![Results Diagram](path/to/results_diagram.png)
